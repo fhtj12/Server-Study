@@ -5,7 +5,7 @@ router.get('/normal', function(req, res) {
     res.send('ok');
 });
 
-router.get('secret', function(req, res) {
+router.get('/secret', function(req, res) {
     res.send('ok');
 });
 
