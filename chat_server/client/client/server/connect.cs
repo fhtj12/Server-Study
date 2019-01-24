@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace client.server
 {
-    class connect
+    public class connect
     {
     }
 }
