@@ -28,7 +28,7 @@ namespace client.data
 
                 foreach (String file in file_list)
                 {
-                    if (file == this.file_name)
+                    if (file == (file_path + this.file_name))
                     {
                         return true;
                     }
