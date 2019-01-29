@@ -49,6 +49,7 @@
     <Compile Include="data\error.cs" />
     <Compile Include="data\file_function.cs" />
     <Compile Include="function\configuration.cs" />
+    <Compile Include="data\program_string.cs" />
     <Compile Include="parser\csv_parser.cs" />
     <Compile Include="Main_form.cs">
       <SubType>Form</SubType>

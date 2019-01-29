@@ -8,5 +8,4 @@ router.get('/normal', function(req, res) {
 router.get('/secret', function(req, res) {
     res.send('ok');
 });
-
 module.exports = router;
