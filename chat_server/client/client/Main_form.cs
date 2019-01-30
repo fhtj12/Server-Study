@@ -19,16 +19,18 @@ namespace client
     {
         public static Hashtable config = new Hashtable();
         private static error error = new error();
+        private string startup_path;
+
         public Main_form()
         {
+            configuration conf = new configuration();
+            config = conf.get_config(); // 환경설정 파일 가져오기
+            startup_path = Application.StartupPath; // 프로그램 시작 경로 잡기
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            configuration conf = new configuration();
-            config = conf.get_config();
-
             if (config == null)
             {
                 MessageBox.Show(error.config_parse);
@@ -37,20 +39,18 @@ namespace client
 
             try
             {
+                // 화면 크기 초기화
                 int x = int.Parse(config["screen_weight"].ToString());
                 int y = int.Parse(config["screen_height"].ToString());
                 ClientSize = new Size(x, y);
+                // 첫 시작 위치 초기화
+                this.Location = new Point(int.Parse(config["screen_x"].ToString()), int.Parse(config["screen_y"].ToString()));
             }
             catch (Exception exception)
             {
                 Console.Write(exception.Message);
                 MessageBox.Show(error.screen_set);
             }
-            program_string set_str = new program_string(
-                Application.StartupPath + @"\\Data\\string\\", config["language"].ToString()); // 프로그램 시작 경로와 파일 경로 합치기
-            //set_str.set_string_on_screen(this); // 현재 폼의 객체 넘기기
-            this.기능ToolStripMenuItem.Text = set_str.get_text("menu_function");
-            this.LoginTool_StripMenuItem.Text = set_str.get_text("menu_function_login");
         }
 
         private void LoginToolStripMenuItem_Click(object sender, EventArgs e)

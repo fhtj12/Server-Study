@@ -14,10 +14,12 @@ namespace client.data
     {
         private string string_path;
         private Hashtable data;
+        private bool flag;
 
         public program_string(string file_path, string language)
         {
             this.string_path = file_path;
+            this.flag = false; // 아래 get_text 메서드의 MessageBox를 한번만 띄우기 위해 만든 플래그
             initialize_string(language);
         }
 
@@ -27,15 +29,24 @@ namespace client.data
             this.data = csv.read(this.string_path + language + ".csv");
         }
 
-        // 기본 기획 데이터에 따라 화면에 표시되는 기본 문자열들 초기화 - 중단
-        public bool set_string_on_screen(Main_form main)
-        {
-            return true;
-        }
-
         public string get_text(string attribute_name)
         {
-            return data[attribute_name].ToString();
+            try
+            {
+                string result = data[attribute_name].ToString();
+                return result;
+            }
+            catch (Exception e)
+            {
+                error err = new error();
+                Console.Write(e.Message);
+                if(this.flag == false)
+                {
+                    MessageBox.Show(err.data_set);
+                    this.flag = true;
+                }
+                return null;
+            }
         }
     }
 }
