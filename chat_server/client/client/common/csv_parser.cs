@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Collections;
 
-namespace client.parser
+namespace client.common
 {
     class csv_parser
     {

@@ -10,26 +10,24 @@ using client.common;
 
 namespace client.data
 {
-    class program_string
+    class resource_path
     {
-        private string string_path;
         private Hashtable data;
         private bool flag;
 
-        public program_string(string file_path, string language)
+        public resource_path()
         {
-            this.string_path = file_path;
             this.flag = false; // 아래 get_text 메서드의 MessageBox를 한번만 띄우기 위해 만든 플래그
-            initialize_string(language);
+            initialize_path();
         }
 
-        public void initialize_string(string language)
+        public void initialize_path()
         {
             csv_parser csv = new csv_parser();
-            this.data = csv.read(this.string_path + language + ".csv");
+            this.data = csv.read(common_data.startup_path + @"\\Data\\" + "path.csv");
         }
 
-        public string get_text(string attribute_name)
+        public string get_path(string attribute_name)
         {
             try
             {
@@ -40,18 +38,13 @@ namespace client.data
             {
                 error err = new error();
                 Console.Write(e.Message);
-                if(this.flag == false)
+                if (this.flag == false)
                 {
                     MessageBox.Show(err.data_set);
                     this.flag = true;
                 }
                 return null;
             }
-        }
-
-        public Hashtable get_data()
-        {
-            return this.data;
         }
     }
 }

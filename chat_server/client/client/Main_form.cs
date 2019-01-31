@@ -8,48 +8,45 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections;
+using System.Threading;
 
-using client.parser;
+using client.common;
 using client.data;
-using client.function;
 
 namespace client
 {
     public partial class Main_form : Form
     {
-        public static Hashtable config = new Hashtable();
-        private static error error = new error();
-        private string startup_path;
-
         public Main_form()
         {
-            configuration conf = new configuration();
-            config = conf.get_config(); // 환경설정 파일 가져오기
-            startup_path = Application.StartupPath; // 프로그램 시작 경로 잡기
-            InitializeComponent();
+            common_data.startup_path = Application.StartupPath; // 프로그램 시작 경로 잡기 반드시 가장 먼저 실행되어야 함.
+            // 로딩으로 전환(컴포넌트 초기화도 이 안에서 진행)
+            loading loading = new loading();
+            loading.loading_process(this);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (config == null)
+            if (common_data.config == null)
             {
-                MessageBox.Show(error.config_parse);
+                MessageBox.Show(common_data.error.config_parse);
                 Application.Exit();
             }
 
             try
             {
                 // 화면 크기 초기화
-                int x = int.Parse(config["screen_weight"].ToString());
-                int y = int.Parse(config["screen_height"].ToString());
+                int x = int.Parse(common_data.config["screen_weight"].ToString());
+                int y = int.Parse(common_data.config["screen_height"].ToString());
                 ClientSize = new Size(x, y);
                 // 첫 시작 위치 초기화
-                this.Location = new Point(int.Parse(config["screen_x"].ToString()), int.Parse(config["screen_y"].ToString()));
+                this.Location = new Point
+                    (int.Parse(common_data.config["screen_x"].ToString()), int.Parse(common_data.config["screen_y"].ToString()));
             }
             catch (Exception exception)
             {
                 Console.Write(exception.Message);
-                MessageBox.Show(error.screen_set);
+                MessageBox.Show(common_data.error.screen_set);
             }
         }
 
@@ -95,12 +92,12 @@ namespace client
 
         private void Version_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("");
+            MessageBox.Show(common_data.basic_str.get_text("program_version"));
         }
 
-        private void Dictionary_ToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void Help_ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("도움말");
         }
 
         private void Update_ToolStripMenuItem_Click(object sender, EventArgs e)

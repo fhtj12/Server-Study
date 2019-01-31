@@ -7,7 +7,7 @@ using System.Collections;
 using System.IO;
 
 using client.data;
-using client.parser;
+using client.common;
 
 namespace client.function
 {
