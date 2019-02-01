@@ -1,5 +1,5 @@
 ﻿program_name=오터 챗
-program_version=Version Alpha 0.1
+program_version=Alpha 0.1
 menu_function=기능
 menu_function_login=로그인
 menu_function_chat=대화 시작
@@ -19,3 +19,4 @@ system_loading=로딩중입니다.
 system_loading_initializing_data=초기 데이터 불러오는 중...
 system_loading_loading_resources=리소스 불러오는 중...
 system_loading_connecting_server=서버 접속 중...
+system_version_string=버전 정보
