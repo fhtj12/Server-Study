@@ -18,7 +18,7 @@ namespace client.common
             string status_string = null;
 
             #region Loading Form 사용을 위한 전처리
-            int sleep_time = 200; // 시간 설정
+            int sleep_time = 500; // 시간 설정
             Thread loading_thread = new Thread(new ThreadStart(loading_screen.show_form));
             loading_thread.IsBackground = true;
             loading_thread.Start();
@@ -35,8 +35,11 @@ namespace client.common
             Thread.Sleep(sleep_time);
             loading_screen.update_status_text(status_string);
 
+            // 각 로딩 때 해야할 것들을 이 안에 넣으면 됨.
             try
             {
+                // 상태 문자열 실제 변경하는 곳
+                status_string = common_data.basic_str.get_text("system_loading_initializing_data");
                 // 컴포넌트 초기화
                 main.InitializeComponent();
                 // 문자열 초기화

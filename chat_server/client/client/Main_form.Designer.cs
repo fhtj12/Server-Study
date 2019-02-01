@@ -28,6 +28,7 @@ namespace client
         /// </summary>
         public void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main_form));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.기능ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LoginTool_StripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,36 +69,36 @@ namespace client
             this.Update_ToolStripMenuItem,
             this.ExitTool_StripMenuItem});
             this.기능ToolStripMenuItem.Name = "기능ToolStripMenuItem";
-            this.기능ToolStripMenuItem.Size = new System.Drawing.Size(12, 20);
+            this.기능ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.기능ToolStripMenuItem.Text = "기능";
             // 
             // LoginTool_StripMenuItem
             // 
             this.LoginTool_StripMenuItem.Name = "LoginTool_StripMenuItem";
-            this.LoginTool_StripMenuItem.Size = new System.Drawing.Size(67, 22);
-            this.LoginTool_StripMenuItem.Click += new System.EventHandler(this.LoginToolStripMenuItem_Click);
+            this.LoginTool_StripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.LoginTool_StripMenuItem.Text = "로그인";
+            this.LoginTool_StripMenuItem.Click += new System.EventHandler(this.LoginToolStripMenuItem_Click);
             // 
             // Chat_ToolStripMenuItem1
             // 
             this.Chat_ToolStripMenuItem1.Name = "Chat_ToolStripMenuItem1";
-            this.Chat_ToolStripMenuItem1.Size = new System.Drawing.Size(67, 22);
-            this.Chat_ToolStripMenuItem1.Click += new System.EventHandler(this.ChatToolStripMenuItem1_Click);
+            this.Chat_ToolStripMenuItem1.Size = new System.Drawing.Size(126, 22);
             this.Chat_ToolStripMenuItem1.Text = "대화 시작";
+            this.Chat_ToolStripMenuItem1.Click += new System.EventHandler(this.ChatToolStripMenuItem1_Click);
             // 
             // Update_ToolStripMenuItem
             // 
             this.Update_ToolStripMenuItem.Name = "Update_ToolStripMenuItem";
-            this.Update_ToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
-            this.Update_ToolStripMenuItem.Click += new System.EventHandler(this.Update_ToolStripMenuItem_Click);
+            this.Update_ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.Update_ToolStripMenuItem.Text = "업데이트";
+            this.Update_ToolStripMenuItem.Click += new System.EventHandler(this.Update_ToolStripMenuItem_Click);
             // 
             // ExitTool_StripMenuItem
             // 
             this.ExitTool_StripMenuItem.Name = "ExitTool_StripMenuItem";
-            this.ExitTool_StripMenuItem.Size = new System.Drawing.Size(67, 22);
-            this.ExitTool_StripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
+            this.ExitTool_StripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.ExitTool_StripMenuItem.Text = "종료";
+            this.ExitTool_StripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // 보기ToolStripMenuItem
             // 
@@ -107,51 +108,51 @@ namespace client
             this.DeleteAccount_ToolStripMenuItem,
             this.AccountInfo_ToolStripMenuItem});
             this.보기ToolStripMenuItem.Name = "보기ToolStripMenuItem";
-            this.보기ToolStripMenuItem.Size = new System.Drawing.Size(12, 20);
+            this.보기ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.보기ToolStripMenuItem.Text = "계정";
             // 
             // CreateAccount_ToolStripMenuItem
             // 
             this.CreateAccount_ToolStripMenuItem.Name = "CreateAccount_ToolStripMenuItem";
-            this.CreateAccount_ToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
-            this.CreateAccount_ToolStripMenuItem.Click += new System.EventHandler(this.CreateAccount_ToolStripMenuItem_Click);
+            this.CreateAccount_ToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.CreateAccount_ToolStripMenuItem.Text = "회원 가입";
+            this.CreateAccount_ToolStripMenuItem.Click += new System.EventHandler(this.CreateAccount_ToolStripMenuItem_Click);
             // 
             // EditAccount_ToolStripMenuItem
             // 
             this.EditAccount_ToolStripMenuItem.Name = "EditAccount_ToolStripMenuItem";
-            this.EditAccount_ToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
-            this.EditAccount_ToolStripMenuItem.Click += new System.EventHandler(this.EditAccount_ToolStripMenuItem_Click);
+            this.EditAccount_ToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.EditAccount_ToolStripMenuItem.Text = "회원 정보 수정";
+            this.EditAccount_ToolStripMenuItem.Click += new System.EventHandler(this.EditAccount_ToolStripMenuItem_Click);
             // 
             // DeleteAccount_ToolStripMenuItem
             // 
             this.DeleteAccount_ToolStripMenuItem.Name = "DeleteAccount_ToolStripMenuItem";
-            this.DeleteAccount_ToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
-            this.DeleteAccount_ToolStripMenuItem.Click += new System.EventHandler(this.DeleteAccount_ToolStripMenuItem_Click);
+            this.DeleteAccount_ToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.DeleteAccount_ToolStripMenuItem.Text = "회원 탈퇴";
+            this.DeleteAccount_ToolStripMenuItem.Click += new System.EventHandler(this.DeleteAccount_ToolStripMenuItem_Click);
             // 
             // AccountInfo_ToolStripMenuItem
             // 
             this.AccountInfo_ToolStripMenuItem.Name = "AccountInfo_ToolStripMenuItem";
-            this.AccountInfo_ToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
-            this.AccountInfo_ToolStripMenuItem.Click += new System.EventHandler(this.AccountInfo_ToolStripMenuItem_Click);
+            this.AccountInfo_ToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.AccountInfo_ToolStripMenuItem.Text = "현재 회원 정보";
+            this.AccountInfo_ToolStripMenuItem.Click += new System.EventHandler(this.AccountInfo_ToolStripMenuItem_Click);
             // 
             // 설정ToolStripMenuItem
             // 
             this.설정ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Config_ToolStripMenuItem});
             this.설정ToolStripMenuItem.Name = "설정ToolStripMenuItem";
-            this.설정ToolStripMenuItem.Size = new System.Drawing.Size(12, 20);
+            this.설정ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.설정ToolStripMenuItem.Text = "설정";
             // 
             // Config_ToolStripMenuItem
             // 
             this.Config_ToolStripMenuItem.Name = "Config_ToolStripMenuItem";
-            this.Config_ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.Config_ToolStripMenuItem.Click += new System.EventHandler(this.Config_ToolStripMenuItem_Click);
+            this.Config_ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.Config_ToolStripMenuItem.Text = "환경설정";
+            this.Config_ToolStripMenuItem.Click += new System.EventHandler(this.Config_ToolStripMenuItem_Click);
             // 
             // ViewToolStripMenuItem
             // 
@@ -159,22 +160,22 @@ namespace client
             this.Version_ToolStripMenuItem,
             this.Help_ToolStripMenuItem1});
             this.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem";
-            this.ViewToolStripMenuItem.Size = new System.Drawing.Size(12, 20);
+            this.ViewToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.ViewToolStripMenuItem.Text = "보기";
             // 
             // Version_ToolStripMenuItem
             // 
             this.Version_ToolStripMenuItem.Name = "Version_ToolStripMenuItem";
-            this.Version_ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.Version_ToolStripMenuItem.Click += new System.EventHandler(this.Version_ToolStripMenuItem_Click);
+            this.Version_ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.Version_ToolStripMenuItem.Text = "버전 정보";
+            this.Version_ToolStripMenuItem.Click += new System.EventHandler(this.Version_ToolStripMenuItem_Click);
             // 
             // Help_ToolStripMenuItem1
             // 
             this.Help_ToolStripMenuItem1.Name = "Help_ToolStripMenuItem1";
-            this.Help_ToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.Help_ToolStripMenuItem1.Click += new System.EventHandler(this.Help_ToolStripMenuItem1_Click);
+            this.Help_ToolStripMenuItem1.Size = new System.Drawing.Size(126, 22);
             this.Help_ToolStripMenuItem1.Text = "도움말";
+            this.Help_ToolStripMenuItem1.Click += new System.EventHandler(this.Help_ToolStripMenuItem1_Click);
             // 
             // Main_form
             // 
@@ -183,10 +184,11 @@ namespace client
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Main_form";
-            this.Text = "오터 챗";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.Text = "오터 챗";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

@@ -87,12 +87,13 @@ namespace client
 
         private void Config_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Config_Form cf = new Config_Form();
+            cf.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
         }
 
         private void Version_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(common_data.basic_str.get_text("program_version"));
+            MessageBox.Show(common_data.basic_str.get_text("system_version_string") + " : " + common_data.basic_str.get_text("program_version"));
         }
 
         private void Help_ToolStripMenuItem1_Click(object sender, EventArgs e)
