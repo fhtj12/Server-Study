@@ -5,7 +5,16 @@ var router = express.Router();
 var login = require('../service/login');
 var account = require('../service/account');
 
+// 세션 관리
+var manage_session = require('../manage/session');
+
 router.get('/login', function(req, res) {
+    manage_session.create_session(req);
+    res.send('ok');
+});
+
+router.get('/logout', function(req, res) {
+    manage_session.destroy_session(req);
     res.send('ok');
 });
 
