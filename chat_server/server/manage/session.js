@@ -1,44 +1,54 @@
 var session = require('express-session');
 var crypto = require('crypto');
 
+var error = require('../manage/error').errors;
+
 var sha = crypto.createHash('sha1');
 
-// 세션 생성, 완료되면 true, 오류나면 false
-var create_session = function(req) {
-    if(req.session.key) {
-        return false;
-    } else {
+// 세션 생성, 완료되면 null, 오류나면 오류코드
+var create_session = function(req, callback) {
+    try {
         sha.update(req.query.uid);
         req.session.key = sha.digest("hex");
         console.log(req.session.key);
-        return true;
+        callback(null);
+    } catch (exception) {
+        console.log(exception);
+        callback(error.invalid_parameter);
     }
 };
 
-// 세션 있는지 체크, 있으면 true 없으면 false
-var check_session = function(req) {
-    if(req.session.key) {
-        return true;
-    } else {
-        return false;
+// 세션 있는지 체크, 있으면 null 없거나 오류나면 오류코드
+var check_session = function(req, callback) {
+    try {
+        if(req.session.key) {
+            callback(null);
+        } else {
+            callback(error.invalid_session);
+        }
+    } catch (exception) {
+        callback(error.invalid_session);
     }
 };
 
-// 세션 삭제, 완료되면 true, 오류나면 false
-var destroy_session = function(req) {
-    if(check_session(req)) {
-        req.session.destroy(function(err) {
-            if(err) {
-                console.log(err);
-                return false;
-            } else {
-                console.log('session destroy ok.');
-                return true;
-            }
-        });
-    } else {
-        console.log('invaild session');
-    }
+// 세션 삭제, 완료되면 null, 오류나면 오류코드
+var destroy_session = function(req, callback) {
+    check_session(req, function(err) {
+        if(err == null) {
+            req.session.destroy(function(err) {
+                if(err) {
+                    console.log(err);
+                    callback(err.failed_destroy_session);
+                } else {
+                    console.log('session destroy ok.');
+                    callback(null);
+                }
+            });
+        } else {
+            console.log('invaild session');
+            callback(error.invalid_session);
+        }
+    });
 };
 
 module.exports = {
