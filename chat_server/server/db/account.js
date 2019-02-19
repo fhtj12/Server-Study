@@ -1,64 +1,52 @@
-var mysql = require('mysql');
 var db = require('./db');
-var log = require('./log');
 var errors = require('../manage/error').errors;
-var sess = require('../manage/session');
 
-function login(req_param, req_session, callback) {
-    var pwd = mysql.escape(req_param.pwd);
-    var login_params = [mysql.escape(req_param.id)];
-
-    db.db_without_transaction('SELECT * FROM account WHERE id = ?', login_params, function(err, result) {
-        if(err === null || err === undefined) {
+function login(params, callback) {
+    db.db_without_transaction('SELECT * FROM otterchat.tbl_account WHERE id = ?', params, function(err, result) {
+        if(err !== null || err === undefined) {
             return callback(errors.mysql_error.mysql_db_error);
         } else {
-            if(pwd !== result[0].pwd) {
-                return callback(errors.login.invalid_pwd);
-            } else {
-                sess.create_session(req_session, function(err, session_key) {
-                    if(err === null || err === undefined) {
-                        return callback(erros.session.invalid_parameter);
-                    } else {
-                        log.update_login_log(result[0].uid, session_key, function(err) {
-                            return callback(err);
-                        });
-                    }
-                });
-            }
+            return callback(null, result);
         }
     });
 }
 
-function create_account(req_param, callback) {
+function create_account(params, callback) {
+    db.db_with_transaction(
+        'insert into otterchat.tbl_account (id, uid, pwd, email, phone, national_code, create_date) values (?,?,?,?,?,?,?)', params, 
+        function(err) {
+            return callback(err);
+        });
+}
+
+function update_account(params, callback) {
 
 }
 
-function update_account(req_param, callback) {
+function delete_account(params, callback) {
 
 }
 
-function delete_account(req_param, callback) {
+function update_password(params, callback) {
 
 }
 
-function update_password(req_param, callback) {
-
+function find_id(params, callback) {
+    db.db_without_transaction('select * from tbl_account where id=?', params, function(err, result) {
+        return callback(err, result);
+    });
 }
 
-function find_id(req_param, callback) {
-
-}
-
-function find_password(req_param) {
+function find_password(params, callback) {
 
 }
 
 module.exports = {
-    login : login,
-    create_account : create_account,
-    update_account : update_account,
-    delete_account : delete_account,
-    update_password : update_password,
-    find_id : find_id,
-    find_password: find_password
+    login_db : login,
+    create_account_db : create_account,
+    update_account_db : update_account,
+    delete_account_db : delete_account,
+    update_password_db : update_password,
+    find_id_db : find_id,
+    find_password_db : find_password
 };

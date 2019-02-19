@@ -10,10 +10,10 @@ var session = require('express-session');
 // 세션 관리
 var manage_session = require('../manage/session');
 
-var account_db = require('../db/account');
+var account = require('../service/account');
 
 router.get('/login', function(req, res) {
-    account_db.login(req.query, req.session, function(result) {
+    account.login(req.query, req.session, function(result) {
         res.send(result);
     });
 });
@@ -28,7 +28,9 @@ router.get('/duplicate_check_id', function(req, res) {
 });
 
 router.get('/create_account', function(req, res) {
-    res.send('ok');
+    account.create_account(req.query, function(err) {
+        res.send(err);
+    });
 });
 
 router.get('/update_account', function(req, res) {
