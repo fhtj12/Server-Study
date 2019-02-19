@@ -10,13 +10,11 @@ var session = require('express-session');
 // 세션 관리
 var manage_session = require('../manage/session');
 
+var account_db = require('../db/account');
+
 router.get('/login', function(req, res) {
-    manage_session.create_session(req.session, function(err) {
-        if(err == null) {
-            res.send('ok');
-        } else {
-            res.send(err);
-        }
+    account_db.login(req.query, req.session, function(result) {
+        res.send(result);
     });
 });
 
