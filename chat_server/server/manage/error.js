@@ -6,9 +6,6 @@ app.errors = {
     invalid_parameter : {
         'err' : 'invalid_parameter'
     },
-    mysql_db_error : {
-        'err' : 'mysql_db_error',
-    },
     internal_error : {
         'err' : 'internal_error'
     },
@@ -23,6 +20,21 @@ app.errors = {
     },
     duplicate_proces : {
         'err' : 'duplicate_proces'
+    },
+    
+    mysql_error : {
+        mysql_db_error : {
+            'err' : 'mysql_db_error'
+        },
+        mysql_failed_get_connection : {
+            'err' : 'mysql_failed_get_connection'
+        },
+        mysql_failed_query : {
+            'err' : 'mysql_failed_query'
+        },
+        mysql_transaction_error : {
+            'err' : 'mysql_transaction_error'
+        }
     },
 
     // account errors

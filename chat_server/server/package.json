@@ -15,6 +15,7 @@
   "dependencies": {
     "connect-redis": "^3.4.0",
     "crypto": "^1.0.1",
+    "date-format": "^2.0.0",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "jshint": "^2.9.6",
