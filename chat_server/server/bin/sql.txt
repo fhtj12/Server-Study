@@ -1,0 +1,1 @@
+CREATE SCHEMA `otterchat` DEFAULT CHARACTER SET utf8 ;

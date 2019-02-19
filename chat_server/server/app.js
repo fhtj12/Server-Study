@@ -20,7 +20,7 @@ app.use(session({
     // redis 서버 설정
     store : new redis_store({
         client : check.redis_client,
-        port : 9523,
+        port : 6379,
         prefix : "session:",
         db : 0
     }),

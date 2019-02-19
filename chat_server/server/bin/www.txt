@@ -1,0 +1,4 @@
+pm2 start app.js --watch -> 변동사항 있을 때마다 재시작
+pm2 show 0 -> 프로세스 상태 보기(숫자는 pm2를 통해 실행된 프로세스 id임)
+pm2 list -> 실행되고 있는 프로세스 보기
+pm2 monit -> cpu랑 메모리 상태 보기
