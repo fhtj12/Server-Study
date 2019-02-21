@@ -13,7 +13,7 @@ function login(params, callback) {
 
 function create_account(params, callback) {
     db.db_with_transaction(
-        'insert into otterchat.tbl_account (id, uid, pwd, email, phone, national_code, create_date) values (?,?,?,?,?,?,?)', params, 
+        'insert into otterchat.tbl_account (id, uid, pwd, username, firstname, lastname, email, phone, national_code, create_date) values (?,?,?,?,?,?,?,?,?,?)', params, 
         function(err) {
             return callback(err);
         });

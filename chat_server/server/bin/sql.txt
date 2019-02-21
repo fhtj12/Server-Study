@@ -1,9 +1,12 @@
 CREATE SCHEMA `otterchat` DEFAULT CHARACTER SET utf8 ;
 
 CREATE TABLE `tbl_account` (
-  `id` varchar(20) NOT NULL,
+  `id` varchar(45) NOT NULL,
   `uid` varchar(45) NOT NULL,
-  `pwd` varchar(45) NOT NULL,
+  `pwd` varchar(100) NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `firstname` varchar(45) NOT NULL,
+  `lastname` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `phone` varchar(30) NOT NULL,
   `national_code` varchar(10) NOT NULL,
@@ -12,6 +15,7 @@ CREATE TABLE `tbl_account` (
   UNIQUE KEY `uid_UNIQUE` (`uid`),
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 
 CREATE TABLE `tbl_login_log` (
