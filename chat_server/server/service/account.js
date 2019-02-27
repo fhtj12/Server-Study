@@ -7,7 +7,7 @@ var sess = require('../manage/session');
 var time = require('../manage/time');
 var cryption = require('../manage/cryption');
 
-function login(req_param, req_session, callback) {
+function login(req_param, session_key, callback) {
     var pwd = mysql.escape(req_param.pwd);
     var login_params = [mysql.escape(req_param.id)];
 
@@ -20,12 +20,16 @@ function login(req_param, req_session, callback) {
             if(pwd !== result[0].pwd) {
                 return callback(errors.login.invalid_pwd);
             } else {
-                sess.create_session(req_param, req_session, function(err, session_key) {
+                sess.create_session(req_param, session_key, function(err, session_key) {
                     if(err !== null || err === undefined) {
                         return callback(errors.session.invalid_parameter);
                     } else {
                         log_db.update_login_log_db(result[0].uid, session_key, function(err) {
-                            return callback(err);
+                            if(err === null || err !== undefined) {
+                                return callback(null, session_key);
+                            } else {
+                                return callback(err);
+                            }
                         });
                     }
                 });

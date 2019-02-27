@@ -13,8 +13,19 @@ var manage_session = require('../manage/session');
 var account = require('../service/account');
 
 router.get('/login', function(req, res) {
-    account.login(req.query, req.session, function(result) {
-        res.send(result);
+    account.login(req.query, req.session_key, function(err, session_key) {
+        var ret;
+        if(session_key === null || session_key !== undefined) {
+            ret = {
+                'ret' : 'ok',
+                'session_key' : session_key
+            };
+        } else {
+            ret = {
+                'ret' : err
+            };
+        }
+        res.send(ret);
     });
 });
 

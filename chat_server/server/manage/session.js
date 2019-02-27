@@ -5,11 +5,11 @@ var error = require('../manage/error').errors;
 var time = require('../manage/time');
 
 // 세션 생성, 완료되면 null, 오류나면 오류코드
-var create_session = function(req_param, session, callback) {
+var create_session = function(req_param, session_key, callback) {
     try {
-        session.key = crypto.createHash('sha1').update(req_param.uid + time.get_server_datetime()).digest('base64');
-        console.log(session.key);
-        callback(null, session.key);
+        session_key = crypto.createHash('sha1').update(req_param.uid + time.get_server_datetime()).digest('base64');
+        console.log(session_key);
+        callback(null, session_key);
     } catch (exception) {
         console.log(exception);
         callback(error.invalid_parameter);
