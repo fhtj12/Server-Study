@@ -7,9 +7,67 @@ var sess = require('../manage/session');
 var time = require('../manage/time');
 var cryption = require('../manage/cryption');
 
+var db_pool = mysql.createPool(mysql_conn);
+
 function login(req_param, session_key, callback) {
     var pwd = mysql.escape(req_param.pwd);
     var login_params = [mysql.escape(req_param.id)];
+
+    // db_pool.getConnection(function(err, conn) {
+    //     if(err) {
+    //         console.log(err);
+    //         return callback(errors.mysql_error.mysql_failed_get_connection);
+    //     } else {
+    //         conn.beginTransaction(function(err) {
+    //             if(err) {
+    //                 console.log(err);
+    //                 conn.release();
+    //                 return callback(errors.mysql_error.mysql_transaction_error);
+    //             } else {
+    //                 account_db.login_db(conn, login_params, function(err, result) {
+    //                     if(err !== null) {
+    //                         conn.release();
+    //                         return callback(err);
+    //                     } else if(result.length == 0) {
+    //                         conn.release();
+    //                         return callback(errors.login.id_not_found);
+    //                     } else if(pwd !== result[0].pwd) {
+    //                         conn.release();
+    //                         return callback(errors.login.invalid_pwd);
+    //                     } else {
+    //                         sess.create_session(req_param, session_key, function(err, session_key) {
+    //                             if(err !== null || err === undefined) {
+    //                                 conn.release();
+    //                                 return callback(errors.session.invalid_parameter);
+    //                             } else {
+    //                                 log_db.update_login_log_db(result[0].uid, session_key, function(err) {
+    //                                     if(err === null || err !== undefined) {
+    //                                         conn.commit(function(err) {
+    //                                             if(err) {
+    //                                                 console.log(err);
+    //                                                 conn.rollback(function() {
+    //                                                     conn.release();
+    //                                                     return callback(errors.mysql_error.mysql_db_error);
+    //                                                 });
+    //                                             }
+    //                                             return callback(null, session_key);
+    //                                         });
+    //                                     } else {
+    //                                         conn.rollback(function() {
+    //                                             conn.release();
+    //                                             console.log(err);
+    //                                             return callback(err);
+    //                                         });
+    //                                     }
+    //                                 });
+    //                             }
+    //                         });
+    //                     }
+    //                 });
+    //             }
+    //         });
+    //     }
+    // });
 
     account_db.login_db(login_params, function(err, result) {
         if(err !== null) {

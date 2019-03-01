@@ -1,10 +1,11 @@
 var db = require('./db');
 var errors = require('../manage/error').errors;
 
-function login(params, callback) {
-    db.db_without_transaction('SELECT * FROM otterchat.tbl_account WHERE id = ?', params, function(err, result) {
+// 딱히 로직은 없고, sql 문장만 여기서 관리함.
+function login(conn, params, callback) {
+    db.db_without_transaction(conn, 'SELECT * FROM otterchat.tbl_account WHERE id = ?', params, function(err, result) {
         if(err !== null || err === undefined) {
-            return callback(errors.mysql_error.mysql_db_error);
+            return callback(err);
         } else {
             return callback(null, result);
         }
@@ -16,7 +17,7 @@ function create_account(params, callback) {
         'insert into otterchat.tbl_account (id, uid, pwd, username, firstname, lastname, email, phone, national_code, create_date) values (?,?,?,?,?,?,?,?,?,?)', params, 
         function(err) {
             return callback(err);
-        });
+    });
 }
 
 function update_account(params, callback) {
@@ -28,17 +29,13 @@ function delete_account(params, callback) {
 }
 
 function update_password(params, callback) {
-
+    
 }
 
 function find_id(params, callback) {
     db.db_without_transaction('select * from tbl_account where id=?', params, function(err, result) {
         return callback(err, result);
     });
-}
-
-function find_password(params, callback) {
-
 }
 
 module.exports = {

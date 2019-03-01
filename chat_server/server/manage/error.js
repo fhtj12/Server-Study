@@ -34,6 +34,9 @@ app.errors = {
         },
         mysql_transaction_error : {
             'err' : 'mysql_transaction_error'
+        },
+        rollback : {
+            'err' : 'rollback'
         }
     },
 
