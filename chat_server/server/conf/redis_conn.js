@@ -3,4 +3,5 @@ module.exports = {
     'connectTimeout' : '5000', // 연결 작업 시간 제한 (밀리 초)
     'name' : 'otterchat', // redis 내의 연결 식별
     'password' : 'otterchat950323', // redis 서버의 비밀번호
+    'logErrors' : 'true'
 };

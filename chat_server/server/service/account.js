@@ -20,7 +20,7 @@ function login(req_param, session_key, callback) {
             if(pwd !== result[0].pwd) {
                 return callback(errors.login.invalid_pwd);
             } else {
-                sess.create_session(req_param, session_key, function(err, session_key) {
+                sess.create_session(req_param, function(err, session_key) {
                     if(err !== null || err === undefined) {
                         return callback(errors.session.invalid_parameter);
                     } else {

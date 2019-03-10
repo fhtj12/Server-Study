@@ -1,15 +1,21 @@
-var sess = require('express-session');
 var crypto = require('crypto');
 
 var error = require('../manage/error').errors;
 var time = require('../manage/time');
+var redis_route = require('../routes/redis');
 
 // 세션 생성, 완료되면 null, 오류나면 오류코드
-var create_session = function(req_param, session_key, callback) {
+var create_session = function(req_param, callback) {
     try {
-        session_key = crypto.createHash('sha1').update(req_param.uid + time.get_server_datetime()).digest('base64');
-        console.log(session_key);
-        callback(null, session_key);
+        var uid = req_param.uid;
+        var session_key = crypto.createHash('sha1').update(uid + time.get_server_datetime()).digest('base64');
+        redis_route.write_session(uid, session_key, function(result) {
+            if(result) {
+                return callback(null, session_key);
+            } else {
+                return callback(undefined);
+            }
+        });
     } catch (exception) {
         console.log(exception);
         callback(error.invalid_parameter);
@@ -17,34 +23,23 @@ var create_session = function(req_param, session_key, callback) {
 };
 
 // 세션 있는지 체크, 있으면 null 없거나 오류나면 오류코드
-var check_session = function(req, callback) {
-    try {
-        if(req.session.key) {
-            callback(null);
+var check_session = function(uid, session_key, callback) {
+    redis_route.check_session(uid, session_key, function(result) {
+        if(result) {
+            return callback(null);
         } else {
-            callback(error.invalid_session);
+            return callback(error.session.invalid_session);
         }
-    } catch (exception) {
-        callback(error.invalid_session);
-    }
+    });
 };
 
 // 세션 삭제, 완료되면 null, 오류나면 오류코드
-var destroy_session = function(req, callback) {
-    check_session(req, function(err) {
-        if(err == null) {
-            req.session.destroy(function(err) {
-                if(err) {
-                    console.log(err);
-                    callback(err.failed_destroy_session);
-                } else {
-                    console.log('session destroy ok.');
-                    callback(null);
-                }
-            });
+var destroy_session = function(uid, callback) {
+    redis_route.delete_session(uid, function(result) {
+        if(result) {
+            return callback(null);
         } else {
-            console.log('invaild session');
-            callback(error.invalid_session);
+            return callback(error.session.invalid_session);
         }
     });
 };
